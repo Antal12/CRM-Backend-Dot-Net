@@ -6,6 +6,7 @@
         public string Name { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
         public string Phone { get; set; } = string.Empty;
+        //add new property
 
         // 🔗 Assigned User (Sales Rep, Manager etc.)
         public int AssignedToUserId { get; set; }
