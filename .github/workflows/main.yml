@@ -1,0 +1,40 @@
+name: .NET Core CI/CD
+
+# Trigger workflow on push to main or pull request
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    # Step 1: Checkout code
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    # Step 2: Setup .NET Core
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.0.x'   # replace with your .NET version
+
+    # Step 3: Restore dependencies
+    - name: Restore dependencies
+      run: dotnet restore
+
+    # Step 4: Build project
+    - name: Build project
+      run: dotnet build --no-restore --configuration Release
+
+    # Step 5: Run tests (if you have tests)
+    - name: Run tests
+      run: dotnet test --no-build --verbosity normal
+
+    # Step 6: Publish (optional, for deployment)
+    - name: Publish project
+      run: dotnet publish --configuration Release --output ./publish
